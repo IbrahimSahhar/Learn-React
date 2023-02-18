@@ -1,0 +1,21 @@
+.toggle {
+    background-color: black;
+    padding: 15px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 5px;
+    border: 2px solid white;
+
+}
+
+.toggle.dark {
+    background-color: black;
+    color: white;
+
+}
+
+.toggle.light {
+    background-color: white;
+    color: black;
+
+}

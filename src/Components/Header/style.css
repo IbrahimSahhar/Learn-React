@@ -1,0 +1,29 @@
+.header {
+    display: flex;
+    padding: 10px 20px;
+    background-color: aqua;
+}
+
+.header ul {
+    flex: 1;
+    display: flex;
+    justify-content: end;
+    align-items: flex-end;
+    list-style: none;
+}
+
+.header ul li {
+    margin-right: 20px;
+}
+
+.header ul li a {
+    text-decoration: none;
+    font-size: 25px;
+    font-weight: 800;
+    color: black;
+
+}
+
+.active {
+    border-bottom: 2px solid firebrick;
+}

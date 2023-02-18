@@ -1,0 +1,13 @@
+.button {
+    padding: 10px;
+    background-color: transparent;
+    border: 2px solid red;
+    cursor: pointer;
+    font-size: 15px;
+    margin-top: 5px;
+
+}
+
+.isActive.button {
+    background-color: aqua;
+}

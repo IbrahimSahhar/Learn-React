@@ -1,0 +1,10 @@
+{
+    "en": {
+      "translation": {
+        "lang" :"العربية",
+        "name question" :"what is your name",
+        "favorite color":"what is your favorite color",
+        "email address" : "what is your email"
+      }
+    }
+  }
