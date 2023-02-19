@@ -1,23 +1,46 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import Container from "../Components/Container/index.jsx";
-import PostData from "../mock/Posts.js";
-export default class Posts extends Component {
-  render() {
-    return (
-      <Container>
-        <div>
-          <ul>
-            {PostData.map((post) => {
-              return (
-                <li key={post.id}>
-                  <Link to={`/dashboard/Posts/${post.id}`}>Post {post.id}</Link>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      </Container>
-    );
-  }
-}
+const Posts = () => {
+  const [counter, setCounter] = useState(0);
+  const [data, setData] = useState(false);
+
+  // useEffect(() => {
+  //   console.log("Mounting and updating");
+  // });
+  // useEffect(() => {
+  //   console.log("Mounting  ");
+  // }, []);
+
+  // useEffect(() => {
+  //   console.log("updating in counter");
+  // }, [counter]);
+
+  // useEffect(() => {
+  //   console.log("updating in data");
+  // }, [data]);
+
+  // useEffect(() => {
+  //   return () => console.log(" UnMounting  ");
+  // }, []);
+
+  // useEffect(() => () => console.log(" UnMounting  "), []);
+
+  const increment = () => {
+    setCounter(counter + 1);
+  };
+  const changeData = () => {
+    setData(!data);
+  };
+
+  return (
+    <Container>
+      <div>{counter}</div>
+      <button onClick={() => increment()}>increment</button>
+      <br />
+      <br />
+      <div>{data ? "true" : "false"}</div>
+      <button onClick={() => changeData()}>click me</button>
+    </Container>
+  );
+};
+export default Posts;

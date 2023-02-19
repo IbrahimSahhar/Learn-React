@@ -1,56 +1,58 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "../Components/Container";
 import Counter from "../Components/Counter";
 
-const counters = [
+const countersData = [
   { id: 1, count: 0, step: 1 },
   { id: 2, count: 0, step: 2 },
   { id: 3, count: 0, step: 3 },
 ];
-export default class Counters extends Component {
-  state = {
-    counters: counters,
-    total: 0,
-  };
+const Counters = () => {
+  const [counters, setCounters] = useState(countersData);
+  const [total, setTotal] = useState(0);
 
-  increment = (id = 1, step = 1) => {
-    this.setState((prev) => {
-      return {
-        counters: prev.counters.map((item) => {
-          if (item.id === id) {
-            return { ...item, count: item.count + step };
-          } else {
-            return item;
-          }
-        }),
-      };
-    });
-  };
-
-  componentDidUpdate() {
-    this.setState((prev) => {
-      const newTotal = prev.counters.reduce((acc, cur) => acc + cur.count, 0);
-      if (prev.total !== newTotal) {
-        return { total: newTotal };
-      }
-    });
-  }
-  render() {
-    return (
-      <Container>
-        <div>
-          {this.state.counters.map((counter) => (
-            <Counter
-              key={counter.id}
-              {...counter}
-              increment={() => this.increment(counter.id, counter.step)}
-              newThis={this}
-            />
-          ))}
-
-          <div className="total">Total : {this.state.total}</div>
-        </div>
-      </Container>
+  const increment = (id = 1, step = 1) => {
+    setCounters(
+      counters.map((item) => {
+        if (item.id === id) {
+          return { ...item, count: item.count + step };
+        } else {
+          return item;
+        }
+      })
     );
-  }
-}
+  };
+  const decrement = (id = 1, step = 1) => {
+    setCounters(
+      counters.map((item) => {
+        if (item.id === id && item.count >= step) {
+          return { ...item, count: item.count - step };
+        } else {
+          return item;
+        }
+      })
+    );
+  };
+  useEffect(() => {
+    setTotal(counters.reduce((acc, cur) => acc + cur.count, 0));
+  }, [counters]);
+
+  return (
+    <Container>
+      <div>
+        {counters.map((counter) => (
+          <Counter
+            key={counter.id}
+            {...counter}
+            increment={() => increment(counter.id, counter.step)}
+            decrement={() => decrement(counter.id, counter.step)}
+          />
+        ))}
+
+        <div className="total">Total : {total}</div>
+      </div>
+    </Container>
+  );
+};
+
+export default Counters;

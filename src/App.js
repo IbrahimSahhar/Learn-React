@@ -9,6 +9,7 @@ import Todo from "./pages/Todo";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import Tasks from "./pages/Tasks";
+import Counters from "./pages/Counters";
 
 function App() {
   const router = useRoutes([
@@ -42,6 +43,10 @@ function App() {
     {
       path: "Posts/:id",
       element: <Post />,
+    },
+    {
+      path: "Counters",
+      element: <Counters />,
     },
     {
       path: "Tasks",

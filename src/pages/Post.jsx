@@ -15,7 +15,7 @@ const Post = () => {
         <h1>price : {myData?.price}</h1>
         <h1>stocked : {myData?.stocked ? "stocked" : "not stocked"}</h1>
       </div>
-      <button onClick={() => navigate("/dashboard/Posts")}>Back</button>
+      <button onClick={() => navigate("/Posts")}>Back</button>
     </div>
   );
 };
