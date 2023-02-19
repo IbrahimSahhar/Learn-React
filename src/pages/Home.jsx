@@ -1,88 +1,66 @@
-import axios from "axios";
-import { Component } from "react";
+import { useState } from "react";
 import Container from "../Components/Container";
 import ToggleButton from "../Components/ToggleButton";
-// import API_URL from "../config/api.js";
 
-export default class Home extends Component {
-  state = {
-    count: 0,
-  };
-  async componentDidMount() {
-    const res = await axios.get(
-      `https://react-tt-api.onrender.com/api/users/profile`,
-      {
-        headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYmMzYTlkMWQ1MjI3MDgxNzBlZjY4YiIsImlhdCI6MTY3NjYzMzMyNiwiZXhwIjoxNjc5MjI1MzI2fQ.vnVvSDXma7teCx40dCZHg405oPcKHjZ0yfKkMuTQhWg`,
-        },
-      }
-    );
-    console.log(res);
-  }
-  // async componentDidMount() {
-  //   const token = localStorage.getItem("token");
-  //   const res = await axios.get(`${API_URL}users/profile`, {
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   });
-  //   console.log(res);
-  // }
-
-  static getDerivedStateFromProps(props, state) {
-    console.log("getDerivedStateFromProps");
-    return null;
-  }
-  shouldComponentUpdate() {
-    console.log("shouldComponentUpdate");
-    return true;
-  }
-  componentDidUpdate() {
-    console.log("componentDidUpdate");
-  }
-  componentDidCatch;
-  getSnapshotBeforeUpdate(prevProps, prevState) {
-    console.log(prevState.count);
-    console.log("getSnapshotBeforeUpdate");
-
-    // console.log(prevProps.totalCount);
-
-    return null;
-  }
-
-  increment = () => {
-    this.setState((prev) => {
-      return { count: prev.count + 1 };
+export default function Home() {
+  const defaultProduct = { name: "", price: "" };
+  const [allProduct, setAllProduct] = useState([]);
+  const [product, setProduct] = useState(defaultProduct);
+  const handelInput = (e) => {
+    const { id, value } = e.target;
+    setProduct({
+      ...product,
+      [id]: value,
     });
   };
-  decrement = () => {
-    this.setState((prev) => {
-      if (this.state.count > 0) return { count: prev.count - 1 };
-    });
+  const handelSubmit = (event) => {
+    event.preventDefault();
+    setAllProduct([product, ...allProduct]);
+    setProduct(defaultProduct);
   };
-  render() {
-    console.log("render");
-    return (
-      <div className="home">
-        <Container>
-          <h2>Home page</h2>
-        </Container>
-        <Container>
-          <div>
-            <button onClick={this.increment}>increment</button>
-            <br />
-            <span>counter : {this.state.count}</span>
-            <br />
-            <button onClick={this.decrement}>decrement</button>
-            <br />
-            <br />
-          </div>
-          <section>
-            <h3>section 1</h3>
-            <ToggleButton />
-          </section>
-        </Container>
-      </div>
-    );
-  }
+  return (
+    <div className="home">
+      <Container>
+        <form onSubmit={(e) => handelSubmit(e)}>
+          <label htmlFor="name">Product Name</label>
+          <input
+            onChange={(e) => handelInput(e)}
+            type="text"
+            id="name"
+            value={product.name}
+            required
+          />
+          <br />
+          <label htmlFor="price">Product Price</label>
+          <input
+            onChange={(e) => handelInput(e)}
+            type="number"
+            id="price"
+            value={product.price}
+            required
+          />
+          <br />
+          <button type="submit">Submit</button>
+        </form>
+
+        <ul style={{ listStyle: "none" }}>
+          {allProduct.map((item, index) => {
+            return (
+              <li key={index}>
+                <br />
+                <div> {item.name}</div>
+                <div>{item.price}</div>
+              </li>
+            );
+          })}
+        </ul>
+      </Container>
+      <Container>
+        <section>
+          <h3>section 1</h3>
+          <ToggleButton />
+        </section>
+      </Container>
+    </div>
+  );
 }
