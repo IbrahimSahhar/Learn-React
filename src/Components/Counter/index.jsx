@@ -1,18 +1,31 @@
 import React from "react";
-import "./style.css";
+import { StyledWrapper, StyledButton } from "./style.js";
+
 const Counter = ({ increment, count = 0, decrement }) => {
   return (
-    <div>
-      <button onClick={increment}>increment</button>
-      <br />
-      <span>counter : {count}</span>
-      <br />
-      <button onClick={decrement} disabled={!count}>
-        decrement
-      </button>
-      <br />
-      <br />
-    </div>
+    <StyledWrapper>
+      <div>
+        <StyledButton>
+          <button style={{ padding: "0.5rem" }} onClick={increment}>
+            increment
+          </button>
+        </StyledButton>
+        <br />
+        <span>counter : {count}</span>
+        <br />
+        <StyledButton counter={!count}>
+          <button
+            style={{ padding: "0.5rem" }}
+            onClick={decrement}
+            disabled={!count}
+          >
+            decrement
+          </button>
+        </StyledButton>
+        <br />
+        <br />
+      </div>
+    </StyledWrapper>
   );
 };
 

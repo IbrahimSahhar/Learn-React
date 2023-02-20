@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Container from "../Components/Container";
+import { Container } from "../global/components.js";
 import ToggleButton from "../Components/ToggleButton";
 
 export default function Home() {
